@@ -5,10 +5,12 @@
       <h5 class="card-title text-center fs-6">Reporte Equipo Futbol</h5>
     </div>
 
+     <!-- Form pincipal de equipo -->
     <div class="card-body">
 
-      <!-- Form -->
       <div class="row">
+
+        <!-- Nombre equipo -->
         <div class="col-6">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
@@ -16,6 +18,8 @@
               aria-label="Username" aria-describedby="basic-addon1" required>
           </div>
         </div>
+
+        <!-- Estadio equipo -->
         <div class="col-6">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Estadio</span>
@@ -24,6 +28,7 @@
           </div>
         </div>
 
+        <!-- Cantidad de titulos -->
         <div class="col-6">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Cantidad de titulos</span>
@@ -32,6 +37,7 @@
           </div>
         </div>
 
+        <!-- Jugadores titulares -->
         <div class="col-4">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Jugadores titulares</span>
@@ -39,12 +45,14 @@
               placeholder="Titulares" aria-label="Username" aria-describedby="basic-addon1">
           </div>
         </div>
+        <!-- Boton para agregar titular -->
         <div class="col-2">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#titularModal">
             Agregar titular
           </button>
         </div>
 
+        <!-- Jugadores suplentes -->
         <div class="col-4">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Jugadores suplentes</span>
@@ -52,6 +60,7 @@
               placeholder="Suplentes" aria-label="Username" aria-describedby="basic-addon1">
           </div>
         </div>
+        <!-- Boton para agregar suplente -->
         <div class="col-2">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suplenteModal">
             Agregar suplente
@@ -62,6 +71,7 @@
           <hr>
         </div>
 
+        <!-- Botones para visualizar reportes basico, detallado y limpiar campos -->
         <div class="col-4">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="generarReporte()"
             data-bs-target="#basicoModal">Reporte basico</button>

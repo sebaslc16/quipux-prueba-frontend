@@ -13,7 +13,7 @@ export class EquipoFutbolService {
 
   constructor(private http: HttpClient) { }
 
-  //Servicio que consume endpoint de registro de equipo
+  //Servicio que consume endpoint de registro de equipo y generar reporte
   public getReportEquipoFutbol(body : EquipoFutbol): Observable<EquipoFutbol> {
     return this.http.post<EquipoFutbol>(this.urlServiceEquipoFutbol+"punto3/json",body);
   }

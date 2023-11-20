@@ -29,14 +29,16 @@ export class PagesComponent {
 
   constructor(private equipoService: EquipoFutbolService) { }
 
+  /** Se inicializa la cantidad de jugadores titulares y suplentes para el equipo */
   ngOnInit(): void {
     this.cantidadTitulares = 0;
     this.cantidadSuplentes = 0;
   }
 
-  // Validaciones para el formulario
+  // Validaciones para el formulario del equipo
   validarFormulario() {
 
+    /** nombre */
     if (this.nombreEquipo == undefined || this.nombreEquipo == "") {
       Swal.fire({
         position: "top-end",
@@ -48,6 +50,7 @@ export class PagesComponent {
       return;
     }
 
+    /** estadio de equipo */
     if (this.estadioEquipo == undefined || this.estadioEquipo == "") {
       Swal.fire({
         position: "top-end",
@@ -59,6 +62,7 @@ export class PagesComponent {
       return;
     }
 
+    /** Jugadores titulares */
     if (this.listaJugadoresTitulares.length <= 0) {
       Swal.fire({
         position: "top-end",
@@ -70,6 +74,7 @@ export class PagesComponent {
       return;
     }
 
+    /** Jugadores suplentes */
     if (this.listaJugadoresSuplentes.length <= 0) {
       Swal.fire({
         position: "top-end",
@@ -85,6 +90,7 @@ export class PagesComponent {
   //Agregar jugador suplente o titular
   agregarJugador(tipo: string) {
 
+    /** Validacion nombre de jugador */
     if (this.jugadorFormulario['nombre'] == undefined || this.jugadorFormulario['nombre'] == '') {
       Swal.fire({
         position: "top-end",
@@ -95,6 +101,8 @@ export class PagesComponent {
       });
       return;
     }
+
+    /** Validacion posicion de jugador */
     if (this.jugadorFormulario['posicion'] == undefined || this.jugadorFormulario['posicion'] == '') {
       Swal.fire({
         position: "top-end",
@@ -111,6 +119,7 @@ export class PagesComponent {
       posicion: this.jugadorFormulario['posicion']
     }
 
+    /** Se agrega el jugador titular o suplente a la lista correspondiente e incrementa el numero */
     if (tipo == 'titular') {
       this.listaJugadoresTitulares.push(jugadorNuevo);
       this.cantidadTitulares++;
@@ -147,8 +156,8 @@ export class PagesComponent {
       titulares: this.listaJugadoresTitulares
     }
 
+    /** Consumo de endpoint que devuelve los datos del equipo para mostrar en los reportes */
     this.equipoService.getReportEquipoFutbol(equipo).subscribe(resp => {
-      console.log(resp);
       this.totalJugadores = resp.titulares.length + resp.suplentes.length;
       this.equipoResultado = resp;
     })
