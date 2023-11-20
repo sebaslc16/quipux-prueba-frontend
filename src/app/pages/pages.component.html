@@ -1,0 +1,229 @@
+<div class="container">
+
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title text-center fs-6">Reporte Equipo Futbol</h5>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Form -->
+      <div class="row">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre</span>
+            <input type="text" class="form-control" [(ngModel)]="nombreEquipo" placeholder="Nombre equipo"
+              aria-label="Username" aria-describedby="basic-addon1" required>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Estadio</span>
+            <input type="text" class="form-control" [(ngModel)]="estadioEquipo" placeholder="Estadio equipo"
+              aria-label="Username" aria-describedby="basic-addon1" required>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Cantidad de titulos</span>
+            <input type="number" class="form-control" [(ngModel)]="titulos" placeholder="Titulos" aria-label="Username"
+              aria-describedby="basic-addon1" required>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Jugadores titulares</span>
+            <input type="number" disabled="true" class="form-control" [(ngModel)]="cantidadTitulares"
+              placeholder="Titulares" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#titularModal">
+            Agregar titular
+          </button>
+        </div>
+
+        <div class="col-4">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Jugadores suplentes</span>
+            <input type="number" disabled="true" class="form-control" [(ngModel)]="cantidadSuplentes"
+              placeholder="Suplentes" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suplenteModal">
+            Agregar suplente
+          </button>
+        </div>
+
+        <div class="col-12">
+          <hr>
+        </div>
+
+        <div class="col-4">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="generarReporte()"
+            data-bs-target="#basicoModal">Reporte basico</button>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="generarReporte()"
+          data-bs-target="#detalladoModal">Reporte detallado</button>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-primary" (click)="limpiar()">Limpiar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal para agregar jugador titular -->
+<div class="modal fade" id="titularModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar titular</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nombre jugador</span>
+                <input type="text" class="form-control" [(ngModel)]="jugadorFormulario['nombre']" placeholder="Nombre"
+                  aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Posicion jugador</span>
+                <input type="text" class="form-control" [(ngModel)]="jugadorFormulario['posicion']"
+                  placeholder="Posicion" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="agregarJugador('titular')">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para agregar jugador suplente -->
+<div class="modal fade" id="suplenteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar suplente</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nombre jugador</span>
+                <input type="text" class="form-control" [(ngModel)]="jugadorFormulario['nombre']" placeholder="Nombre"
+                  aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Posicion jugador</span>
+                <input type="text" class="form-control" [(ngModel)]="jugadorFormulario['posicion']"
+                  placeholder="Posicion" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="agregarJugador('suplente')">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para reporte basico -->
+<div class="modal fade" id="basicoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Reporte Basico</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              Nombre Equipo : {{equipoResultado?.nombreEquipo}}
+            </div>
+            <div class="col-6">
+              Estadio Equipo : {{equipoResultado?.estadioEquipo}}
+            </div>
+            <div class="col-6">
+              Total jugadores del Equipo : {{totalJugadores}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para reporte detallado -->
+<div class="modal fade" id="detalladoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Reporte Detallado</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              Nombre Equipo : {{equipoResultado?.nombreEquipo}}
+            </div>
+            <div class="col-12">
+              <hr>
+            </div>
+            <div  class="col-6">
+              Jugadores Titulares
+              <ol>
+                <li *ngFor="let jugador of listaJugadoresTitulares">{{jugador.nombre}} - {{jugador.posicion}}</li>
+              </ol>
+            </div>
+            <div  class="col-6">
+              Jugadores Suplentes
+              <ol>
+                <li *ngFor="let jugador of listaJugadoresSuplentes">{{jugador.nombre}} - {{jugador.posicion}}</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
